@@ -1,4 +1,5 @@
 import React from 'react';
+import * as firebase from 'firebase';
 import logo from './logo.svg';
 import './App.css';
 
