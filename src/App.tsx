@@ -1,14 +1,31 @@
 import React, {useEffect, useRef, useState} from 'react';
 import firebase from 'firebase';
+import { atom, useRecoilState } from 'recoil';
+import { Layout } from 'antd';
+
+import { Sidebar } from './core/componrnts/sidebar/components/sidebar';
 
 import { auth, signInWithGoogle } from './firebase';
+import { mainRoutes } from "./App.routing";
 
 import './App.css';
 
+
+const userInfo = atom({
+  key: 'userInfo',
+  default: {
+    isAuth: false,
+    name: '',
+    email: '',
+  }
+})
+
 function App() {
-  const [currentUser, setCurrentUser] = useState();
   const unsubscribeFromAuth = useRef<firebase.Unsubscribe>();
-  
+ 
+  const [currentUser, setCurrentUser] = useState();
+  const [isAuthUser, setIsAuthUser] = useRecoilState<any>(userInfo);
+
   useEffect(() => {
     unsubscribeFromAuth.current = auth.onAuthStateChanged((user) => {
       setCurrentUser(user)
@@ -19,21 +36,26 @@ function App() {
       }
     }
   }, [])
+  useEffect(() => {
+    currentUser && setIsAuthUser({isAuth: true, name: currentUser?.displayName, email: currentUser?.email});
+  }, [currentUser])
   
   
   return (
     <div>
-      {currentUser ? (
-        <div>
-          <div>
-            <img src={currentUser.photoURL} />
-          </div>
-          <div>Name: {currentUser.displayName}</div>
-          <div>Email: {currentUser.email}</div>
-
-          <button onClick={() => auth.signOut()}>LOG OUT</button>
-        </div>
-        ) : <button onClick={signInWithGoogle}>SIGN IN WITH GOOGLE</button>}
+      {
+        currentUser
+          ?
+          (
+            <Layout style={{ minHeight: '100vh' }}>
+              <Sidebar/>
+              <Layout>
+                <main className="content">{mainRoutes}</main>
+              </Layout>
+            </Layout>
+        )
+        :
+        <button onClick={signInWithGoogle}>SIGN IN WITH GOOGLE</button>}
     </div>
   );
 }

@@ -1,0 +1,15 @@
+.sideMenuItem {
+  list-style-type: none;
+  .navLink {
+    color: #f5f9fe;
+    &:hover {
+      color: white;
+    }
+    .svg {
+      margin-right: 10px;
+    }
+  }
+}
+.active {
+  color: red!important;
+}

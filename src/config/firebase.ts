@@ -6,6 +6,5 @@ const firebaseConfig = {
   storageBucket: "my-notes-c73de.appspot.com",
   messagingSenderId: "901151126511",
   appId: "1:901151126511:web:f39ba1435b532d158ffc1a"
-}
-
+};
 export default  firebaseConfig;
