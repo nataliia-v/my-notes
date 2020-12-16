@@ -11,7 +11,7 @@ import { mainRoutes } from "./App.routing";
 import './App.css';
 
 
-const userInfo = atom({
+export const userInfo = atom({
   key: 'userInfo',
   default: {
     isAuth: false,
