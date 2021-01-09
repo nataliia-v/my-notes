@@ -1,4 +1,6 @@
 @import '~antd/dist/antd.css';
+@import './assets/scss/variables.scss';
+@import './assets/scss/mixins.scss';
 
 body {
   margin: 0;

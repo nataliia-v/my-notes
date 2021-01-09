@@ -1,4 +1,23 @@
+@import '../../../../../assets/scss/variables.scss';
+
 .sidebarNav {
+  padding-top: 20px;
   .sidebarList {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.logout {
+  display: flex;
+  flex-direction: row;
+  padding: 10px 20px;
+  align-items: baseline;
+  p {
+    color: $sidebar-color-text;
+  }
+  svg {
+    margin-right: 10px;
+    color: $sidebar-color-text;
   }
 }
