@@ -1,0 +1,15 @@
+FROM node:14-alpine
+
+WORKDIR /app
+
+COPY package.json /app
+COPY yarn.lock /app
+
+RUN apk add --no-cache g++ make python
+
+# Globally node-sass from NPM
+RUN yarn install
+
+COPY . /app
+
+CMD ["yarn", "start"]
