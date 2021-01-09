@@ -1,15 +1,40 @@
+@import '../../../../../assets/scss/variables.scss';
+
 .sideMenuItem {
   list-style-type: none;
+  //width: 100%;
+  padding: 0;
+  margin: 0;
+  margin-bottom: 10px;
   .navLink {
-    color: #f5f9fe;
+    color: $sidebar-color-text;
+    padding: 10px 20px;
+    //width: 100%;
     &:hover {
-      color: white;
+      color:$sidebar-color-text ;
     }
     .svg {
       margin-right: 10px;
+      svg {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 }
 .active {
+  //border: 1px solid $sidebar-color-text;
+  //width: 100%;
   color: red!important;
+  //font-size: 25px;
+  //box-shadow: 0 0 10px $sidebar-color-text;
+  svg {
+    //width: 25px!important;
+    //height: 25px!important;
+    //box-shadow: 0 0 10px $sidebar-color-text;
+  }
+  .navLinkName {
+    //text-shadow:  1px 1px 2px black, 0 0 1em $sidebar-color-text;
+  }
+
 }

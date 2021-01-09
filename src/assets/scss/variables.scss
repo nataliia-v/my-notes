@@ -1,0 +1,30 @@
+@import './mixins.scss';
+
+$white: #FFFFFF;
+$black: #000000;
+
+$primary-color: #2096ee;
+$primary-color-text: #f1f7fd;
+
+$secondary-color: #ff5d6d;
+
+$text-color: #12152c;
+$secondary-text-color: #696969;
+$thirdly-text-color: #abacb7;
+
+$main-background-color: #f5f9fe;
+$secondary-background-color: $white;
+
+$divider-color: #f6f6f6;
+$main-border-radius: 6px;
+
+/* using variables */
+
+/* sidebar */
+$sidebar-bg: $primary-color;
+$sidebar-color-text: $primary-color-text;
+
+/* header */
+$section-header-bg: $main-background-color;
+
+
