@@ -1,64 +1,95 @@
-import React, { useEffect, useRef, useState } from "react";
-import firebase from "firebase";
-import { atom, useRecoilState } from "recoil";
-import { Layout } from "antd";
+import React, { useEffect } from "react";
+import {atom, useRecoilState, useRecoilValue} from "recoil";
+import { Layout, Spin } from "antd";
+import { Route } from "react-router-dom";
 
-import { Sidebar } from "./core/componrnts/sidebar/components/sidebar";
-
-import { auth, signInWithGoogle } from "./firebase";
-import { mainRoutes } from "./App.routing";
+import { SignIn } from "./features/auth/signIn";
+import * as db from './firebase'
+import { useAuth } from "./shared/hooks";
 
 import "./App.css";
 
-export const userInfo = atom({
-  key: "userInfo",
-  default: {
-    isAuth: false,
-    name: "",
-    email: "",
-  },
+export const loggedUser = atom({
+  key: "loggedUser",
+  default: null,
 });
 
-function App() {
-  const unsubscribeFromAuth = useRef<firebase.Unsubscribe>();
+function HomePage() {
+  const user = useRecoilValue<any>(loggedUser);
+  
+  return (
+    <Layout>
+      Home Page
+      <p>Hello, {user?.displayName}</p>
+      <p>UID {user?.uid}</p>
+      <UserLists/>
+    </Layout>
+  );
+}
 
-  const [currentUser, setCurrentUser] = useState();
-  const [isAuthUser, setIsAuthUser] = useRecoilState<any>(userInfo);
+function ListPage() {
+  return (
+    <Layout>
+      List Page
+    </Layout>
+  );
+}
 
+function UserLists() {
+  
   useEffect(() => {
-    unsubscribeFromAuth.current = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setCurrentUser(user);
-      }
-    });
-    return () => {
-      if (unsubscribeFromAuth.current) {
-        unsubscribeFromAuth.current();
-      }
-    };
+    db.getUserLists('5AISZooLQ3gKTMgUE9egoZ5nGu43')
   }, []);
+  return (
+    <Layout>
+      User Lists
+    </Layout>
+  );
+}
+
+export interface AuthAppProps {
+  user: any
+}
+
+export const AuthApp: React.FC<AuthAppProps> = ({user}) => {
+  
+  const [authUser, setAuthUser] = useRecoilState<any>(loggedUser);
+  
+  const { displayName, email, photoURL, uid } = user;
+  
   useEffect(() => {
-    currentUser &&
-      setIsAuthUser({
-        isAuth: true,
-        name: currentUser?.displayName,
-        email: currentUser?.email,
-      });
-  }, [currentUser]);
+    user &&
+    setAuthUser({
+      displayName,
+      email,
+      photoURL,
+      uid
+    }
+    )}, []);
+  
+  
+  return(
+    <>
+      <button onClick={()=> {db.logOut()}}>Logout</button>
+  
+      <Route path="/:listId" component={ListPage} />
+      <Route exact path="/" component={HomePage} />
+    </>
+  )
+}
+
+function UnAuthApp() {
+  return <SignIn />;
+}
+
+function App() {
+
+const { user, loading } = useAuth();
+  
+  if (loading) return <Spin/>
 
   return (
-    <div>
-      {currentUser ? (
-        <Layout style={{ minHeight: "100vh" }}>
-          <Sidebar />
-          <Layout>
-            <main className="content">{mainRoutes}</main>
-          </Layout>
-        </Layout>
-      ) : (
-        <button onClick={signInWithGoogle}>SIGN IN WITH GOOGLE</button>
-      )}
-    </div>
+    user ? <AuthApp user={user}/> : <UnAuthApp/>
   );
 }
 

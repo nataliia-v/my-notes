@@ -5,7 +5,7 @@ import { LogoutOutlined } from "@ant-design/icons";
 
 import { SideMenuItem } from "../sideMenuItem";
 
-import { auth } from "../../../../../firebase";
+// import { auth } from "../../../../../firebase";
 import { sidebarData } from "../../constants/sidebarData";
 import { overviewPathName } from "../../../../../shared/constants/routingConstants";
 
@@ -44,9 +44,7 @@ export const Sidebar: React.FC = () => {
 
       <li className={styles.logout}>
         <LogoutOutlined />
-        <p onClick={() => auth.signOut()}>LOG OUT</p>
       </li>
-      {/*<button onClick={() => auth.signOut()}>LOG OUT</button>*/}
     </Sider>
   );
 };
