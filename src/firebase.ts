@@ -37,6 +37,5 @@ export const getUserLists = async (userId: string) => {
   const snapshot = await db
     .collection('notes').where('author', '==', userId)
     .get();
-  const data = snapshot.docs.map((doc: any) => ({ id: doc.id,  ...doc.data() }))
-  console.log('data', data);
+  return snapshot.docs.map((doc: any) => ({ id: doc.id,  ...doc.data() }))
 }

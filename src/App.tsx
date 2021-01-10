@@ -8,6 +8,8 @@ import * as db from './firebase'
 import { useAuth } from "./shared/hooks";
 
 import "./App.css";
+import useSWR from "swr";
+import {NoteItem} from "./features/notes/components/notesList";
 
 export const loggedUser = atom({
   key: "loggedUser",
@@ -36,13 +38,25 @@ function ListPage() {
 }
 
 function UserLists() {
+  const user = useRecoilValue<any>(loggedUser);
   
-  useEffect(() => {
-    db.getUserLists('5AISZooLQ3gKTMgUE9egoZ5nGu43')
-  }, []);
+  const { data: notes, error } = useSWR(user?.uid, db.getUserLists)
+  
+  if (error) return <div>Error: {error.message}</div>
+  if (!notes) return <Spin/>
+  if (notes.length === 0) return <div>EMPTY</div>
+  
   return (
     <Layout>
-      User Lists
+      {
+        notes.map((item: NoteItem) => (
+          <div key={item.id}>
+            <p>
+              {item.name}
+            </p>
+          </div>
+        ))
+      }
     </Layout>
   );
 }
