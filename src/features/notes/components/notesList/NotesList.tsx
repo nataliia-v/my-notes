@@ -7,15 +7,16 @@ import { Header } from "../../../../shared/components/header";
 import { fetchNotes } from "../../store";
 
 export interface NoteItem {
+  author?: string,
   co_owner: string | null;
-  created_at: object;
-  description: string;
-  id: number;
-  images: string[];
-  label: string;
-  list: null;
-  name: string;
-  updated_at: object;
+  created_at: object | null | Date;
+  description: string | null;
+  id?: string;
+  images: string[] | null;
+  label: string | null;
+  list: null | any;
+  name: string | null;
+  updated_at: object | null;
 }
 
 

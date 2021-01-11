@@ -10,6 +10,7 @@ import { useAuth } from "./shared/hooks";
 import "./App.css";
 import useSWR from "swr";
 import {NoteItem} from "./features/notes/components/notesList";
+import {CreateNote} from "./features/notes/components/createNote";
 
 export const loggedUser = atom({
   key: "loggedUser",
@@ -25,6 +26,8 @@ function HomePage() {
       <p>Hello, {user?.displayName}</p>
       <p>UID {user?.uid}</p>
       <UserLists/>
+  
+      <CreateNote/>
     </Layout>
   );
 }
@@ -40,7 +43,7 @@ function ListPage() {
 function UserLists() {
   const user = useRecoilValue<any>(loggedUser);
   
-  const { data: notes, error } = useSWR(user?.uid, db.getUserLists)
+  const { data: notes, error } = useSWR(user?.uid, db.getUserNotes)
   
   if (error) return <div>Error: {error.message}</div>
   if (!notes) return <Spin/>
