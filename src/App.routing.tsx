@@ -1,5 +1,5 @@
-import { Overview } from "./features/components/overview/components/userInfo";
-import { NotesList } from "./features/components/notes/components/notesList";
+import { Overview } from "./features/overview/components/userInfo";
+import { NotesList } from "./features/notes/components/notesList";
 
 import { mapRoutes } from "./shared/utils";
 import { withAuth } from "./shared/hocs";

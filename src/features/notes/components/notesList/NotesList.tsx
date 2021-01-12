@@ -2,20 +2,21 @@ import React, { useState} from "react";
 import { useRecoilValueLoadable } from "recoil";
 import { Spin } from 'antd';
 
-import { Header } from "../../../../../shared/components/header";
-import { app } from "../../../../../firebase";
+import { Header } from "../../../../shared/components/header";
+// import { app } from "../../../../firebase";
 import { fetchNotes } from "../../store";
 
 export interface NoteItem {
+  author?: string,
   co_owner: string | null;
-  created_at: object;
+  created_at: object | null | Date;
   description: string;
-  id: number;
-  images: string[];
-  label: string;
-  list: null;
+  id?: string;
+  images: string;
+  label: string | null;
+  list: null | any;
   name: string;
-  updated_at: object;
+  updated_at: object | null;
 }
 
 
@@ -54,10 +55,10 @@ export const NotesList: React.FC = () => {
   
   const onUploadImage = async (e: any) => {
     const file = e.target.files[0]; // upload the first file only
-    const storageRef = app.storage().ref();
-    const fileRef = storageRef.child(file.name);
-    await fileRef.put(file);
-    setImgUrl(await fileRef.getDownloadURL())
+    // const storageRef = app.storage().ref();
+    // const fileRef = storageRef.child(file.name);
+    // await fileRef.put(file);
+    // setImgUrl(await fileRef.getDownloadURL())
   };
   
   const onSubmit = (e: any) => {
