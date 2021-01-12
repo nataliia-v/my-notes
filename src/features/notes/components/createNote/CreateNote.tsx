@@ -1,24 +1,21 @@
-import React, {useState} from "react";
-import {useRecoilValue} from "recoil";
+import React, { useState } from "react";
+import { useRecoilValue } from "recoil";
+import { mutate } from 'swr';
 
-import {loggedUser} from "../../../../App";
-import {NoteItem} from "../notesList";
+import { loggedUser } from "../../../../App";
+import { NoteItem } from "../notesList";
 import * as db from '../../../../firebase'
+import { DEFAULT_NOTE } from "../constants";
+
+import styles from './CreateNote.module.scss';
+
 
 export const CreateNote: React.FC = () => {
   
   const user = useRecoilValue<any>(loggedUser);
   
-  const [note, setNote] = useState<NoteItem>({
-    name: "",
-    description: "",
-    images: null,
-    created_at: null,
-    label: null,
-    list: null,
-    updated_at: null,
-    co_owner: null
-  });
+  const [note, setNote] = useState<NoteItem>(DEFAULT_NOTE);
+  const [submitting, setSubmitting] = useState<boolean>(false);
   
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLTextAreaElement>| any ) => {
     const { name, value, files } = event.target;
@@ -31,9 +28,17 @@ export const CreateNote: React.FC = () => {
     }
   }
   
-  const handleCreateNote = () => {
-    console.log('note', note);
-    db.createNote(note, user);
+  const handleCreateNote = async () => {
+    try {
+      setSubmitting(true);
+      await db.createNote(note, user);
+      await mutate(user.uid);
+      setNote(DEFAULT_NOTE)
+    } catch (error){
+      console.error(error)
+    } finally {
+      setSubmitting(false);
+    }
   }
   
   return (
@@ -44,10 +49,12 @@ export const CreateNote: React.FC = () => {
         name="name"
         placeholder="Add name"
         required
+        value={note.name}
         onChange={(event)=> handleChange(event)}/>
       <textarea
         name="description"
         placeholder="Add description"
+        value={note.description}
         onChange={(event)=> handleChange(event)}/>
       <input
         placeholder="Add list name"
@@ -57,11 +64,11 @@ export const CreateNote: React.FC = () => {
       />
       {
         note.images && (
-          <img src={URL.createObjectURL(note.images)} alt=""/>
+          <img className={styles.img} src={URL.createObjectURL(note.images)} alt=""/>
         )
       }
-      <button onClick={handleCreateNote}>
-        Create Note
+      <button onClick={handleCreateNote} disabled={submitting}>
+        {submitting ? "Creating..." : "Create Note"}
       </button>
     </>
   );

@@ -10,12 +10,12 @@ export interface NoteItem {
   author?: string,
   co_owner: string | null;
   created_at: object | null | Date;
-  description: string | null;
+  description: string;
   id?: string;
-  images: string[] | null;
+  images: string;
   label: string | null;
   list: null | any;
-  name: string | null;
+  name: string;
   updated_at: object | null;
 }
 
