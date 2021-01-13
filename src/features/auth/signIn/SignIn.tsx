@@ -1,5 +1,4 @@
 import React from "react";
-import { Layout } from 'antd';
 
 import * as db from '../../../firebase';
 
