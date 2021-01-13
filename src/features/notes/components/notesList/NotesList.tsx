@@ -17,6 +17,7 @@ export interface NoteItem {
   list: null | any;
   name: string;
   updated_at: object | null;
+  is_done: boolean;
 }
 
 
