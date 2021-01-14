@@ -5,6 +5,7 @@ import { Route } from "react-router-dom";
 
 import { SignIn } from "./features/auth/signIn";
 import { HomePage } from "./features/homePage/components";
+import { Header } from "./shared/components/header";
 
 import * as db from './firebase'
 import { useAuth } from "./shared/hooks";
@@ -46,13 +47,14 @@ export const AuthApp: React.FC<AuthAppProps> = ({user}) => {
       uid
     }
     )}, []);
+
   
   
   return(
     <>
-      <button onClick={()=> {db.logOut()}}>Logout</button>
-      <Route path="/:noteId" component={NotePage} />
-      <Route exact path="/" component={HomePage} />
+      <Header name={'Overview'}/>
+        <Route path="/:noteId" component={NotePage} />
+        <Route exact path="/" component={HomePage} />
     </>
   )
 }

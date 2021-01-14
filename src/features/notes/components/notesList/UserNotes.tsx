@@ -2,28 +2,35 @@ import React from "react";
 import { useRecoilValue } from "recoil";
 import useSWR from "swr";
 import {Col, Layout, Row, Spin, Empty, Card, Avatar} from "antd";
-
+import {
+  EditOutlined,
+  EllipsisOutlined,
+  SettingOutlined
+} from "@ant-design/icons";
 
 import { NoteItem } from "./NotesList";
 import * as db from "../../../../firebase";
 import { loggedUser } from "../../../../App";
 
 import styles from './UserNotes.module.scss';
-import {EditOutlined, EllipsisOutlined, SettingOutlined} from "@ant-design/icons";
 
-export const UserNotes = () => {
+export interface UserNotesProps {
+  notes: NoteItem[]
+}
+
+export const UserNotes: React.FC<UserNotesProps> = ({notes}) => {
   const { Meta } = Card;
   
   const user = useRecoilValue<any>(loggedUser);
   
-  const { data: notes, error } = useSWR(user?.uid, db.getUserNotes)
-  
-  if (error) return <div>Error: {error.message}</div>
-  if (!notes) return <Spin/>
-  if (notes.length === 0) return <Empty/>
+  // const { data: notes, error } = useSWR(user?.uid, db.getUserNotes)
+  //
+  // if (error) return <div>Error: {error.message}</div>
+  // if (!notes) return <Spin/>
+  // if (notes.length === 0) return <Empty/>
 
   return (
-    <Layout>
+    <Layout className={styles.notesList}>
       <Row justify="space-between">
         {
           notes.map((item: NoteItem) => (

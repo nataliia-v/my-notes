@@ -1,8 +1,12 @@
+@import "../../../../assets/scss/variables";
+.notesList {
+  background-color: $main-background-color;
+}
+
 .imgWrap {
   width: 200px;
   height: 150px;
 }
-
 .img {
   object-fit: cover;
   width: 100%;

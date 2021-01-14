@@ -9,7 +9,7 @@ export const fetchNotes = selector({
     try {
       // const usersCollection = await db.collection("notes").get();
       
-      // return usersCollection.docs.map((doc) => {
+      // return usersCollection.docs.map((doc: any) => {
       //     return doc.data();
       //   }
       // )

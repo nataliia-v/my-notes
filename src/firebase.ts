@@ -4,6 +4,8 @@ import 'firebase/storage'
 import 'firebase/firestore'
 import firebaseConfig from "./config/firebase";
 import {NoteItem} from "./features/notes/components/notesList";
+import {selector, useRecoilValue} from "recoil";
+import {loggedUser} from "./App";
 
 const firebaseApp = !firebase.apps.length
   ? firebase.initializeApp(firebaseConfig)
@@ -74,3 +76,28 @@ export const createNote = async (note : NoteItem, user: any) => {
       ]
     })
 }
+
+export const getUserNotess = async (userId: string) => {
+  const snapshot = await db
+    .collection('notes').where('author', '==', userId)
+    .get();
+  return snapshot.docs.map((doc: any) => ({ id: doc.id,  ...doc.data() }))
+}
+
+
+export const fetchNotess = selector({
+  key: 'notesSelector',
+  get: async ({get}) => {
+    const user = get(loggedUser)
+    console.log('user in firebase', user);
+    // const { uid } = user;
+    // '5AISZooLQ3gKTMgUE9egoZ5nGu43'
+    try {
+      const usersCollection = await db.collection('notes').where('author', '==','' ).get();
+      
+      return usersCollection.docs.map((doc: any) => ({ id: doc.id,  ...doc.data() }))
+    } catch(error){
+      throw error;
+    }
+  }
+});

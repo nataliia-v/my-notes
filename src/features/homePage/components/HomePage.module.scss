@@ -1,0 +1,8 @@
+@import "../../../assets/scss/variables";
+
+.overviewSection {
+  display: flex;
+  justify-content: space-between;
+  background-color: $main-background-color;
+  padding:0 50px;
+}
