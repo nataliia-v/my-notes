@@ -85,19 +85,17 @@ export const getUserNotess = async (userId: string) => {
 }
 
 
-export const fetchNotess = selector({
+export const fetchNotes = selector({
   key: 'notesSelector',
   get: async ({get}) => {
-    const user = get(loggedUser)
-    console.log('user in firebase', user);
-    // const { uid } = user;
-    // '5AISZooLQ3gKTMgUE9egoZ5nGu43'
-    try {
-      const usersCollection = await db.collection('notes').where('author', '==','' ).get();
-      
-      return usersCollection.docs.map((doc: any) => ({ id: doc.id,  ...doc.data() }))
-    } catch(error){
-      throw error;
-    }
+    const user = get(loggedUser);
+
+      try {
+        const usersCollection = await db.collection('notes').where('author', '==',user?.uid ).get();
+        return usersCollection.docs.map((doc: any) => ({ id: doc.id,  ...doc.data() }))
+      } catch(error){
+        throw error;
+      }
+
   }
 });

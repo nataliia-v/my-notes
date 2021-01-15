@@ -1,45 +1,19 @@
 @import "../../../../assets/scss/variables";
+
 .notesList {
   background-color: $main-background-color;
+  border-radius: 20px;
 }
 
-.imgWrap {
-  width: 200px;
-  height: 150px;
-}
-.img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
+.listWrap {
+  display: flex;
+  align-items: center;
+  padding: 10px 0 10px 0;
 }
 
-.description {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 10px;
+.rotated {
+  padding: 10px;
+  color:$secondary-text-color;
+  writing-mode: tb-rl;
+  transform: rotate(-180deg);
 }
-
-
-//.description {
-//  --max-lines: 3;
-//  position: relative;
-//  max-height: calc(var(--lh) * var(--max-lines));
-//  overflow: hidden;
-//  padding-right: 1rem; /* space for ellipsis */
-//  font-size: 10px;
-//}
-//.description::before {
-//  position: absolute;
-//  content: "...";
-//  inset-block-end: 0; /* "bottom" */
-//  inset-inline-end: 0; /* "right" */
-//}
-//.description::after {
-//  content: "";
-//  position: absolute;
-//  inset-inline-end: 0; /* "right" */
-//  width: 1rem;
-//  height: 1rem;
-//  background: white;
-//}

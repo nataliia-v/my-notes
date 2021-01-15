@@ -1,7 +1,7 @@
 import React from "react";
 import { useRecoilValue } from "recoil";
 import useSWR from "swr";
-import {Col, Layout, Row, Spin, Empty, Card, Avatar} from "antd";
+import {Col, Layout, Row, Spin, Empty, Card, Divider} from "antd";
 import {
   EditOutlined,
   EllipsisOutlined,
@@ -9,10 +9,13 @@ import {
 } from "@ant-design/icons";
 
 import { NoteItem } from "./NotesList";
+import { NoteCard } from "../noteCard";
+
 import * as db from "../../../../firebase";
 import { loggedUser } from "../../../../App";
 
 import styles from './UserNotes.module.scss';
+
 
 export interface UserNotesProps {
   notes: NoteItem[]
@@ -31,41 +34,27 @@ export const UserNotes: React.FC<UserNotesProps> = ({notes}) => {
 
   return (
     <Layout className={styles.notesList}>
-      <Row justify="space-between">
-        {
-          notes.map((item: NoteItem) => (
-            // <Col key={item.id} span={4}><p>{item.name}</p>
-            //     <img className={styles.img} src={item.images} alt=""/>
-            // </Col>
-            <Card
-              style={{ width: 200, margin: 10}}
-              key={item.id}
-              bodyStyle={{padding: 10}}
-              cover={
-                <div className={styles.imgWrap}>
-                  <img
-                    alt="example"
-                    src={item.images ? item.images : "https://argamak-sher.uz/wp-content/uploads/no-image.png"}
-                    className={styles.img}
-                  />
-                </div>
-              }
-              actions={[
-                <SettingOutlined key="setting" />,
-                <EditOutlined key="edit" />,
-                <EllipsisOutlined key="ellipsis" />,
-              ]}
-            >
-              <Meta
-                title={item.name}
-                description={item.description}
-                className={styles.description}
-              />
-            </Card>
-            
-        ))
-      }
-      </Row>
+      
+      <div className={styles.listWrap}>
+        <span className={styles.rotated}>IN PROGRESS</span>
+        <Row justify="start">
+          {
+            notes.filter((note: NoteItem) => !note.is_done).map((item: NoteItem) => <NoteCard key={item.id} note={item}/>)
+          }
+        </Row>
+      </div>
+      
+      <Divider/>
+      
+      <div className={styles.listWrap}>
+        <span className={styles.rotated}>DONE</span>
+        <Row justify="start">
+          {
+            notes.filter((note: NoteItem) => note.is_done).map((item: NoteItem) => <NoteCard key={item.id} note={item}/>)
+          }
+        </Row>
+      </div>
+      
     </Layout>
   );
 }

@@ -11,9 +11,10 @@ import * as db from './firebase'
 import { useAuth } from "./shared/hooks";
 
 import "./App.css";
+import firebase from "firebase";
 
 
-export const loggedUser = atom({
+export const loggedUser = atom<any>({
   key: "loggedUser",
   default: null,
 });

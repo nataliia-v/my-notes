@@ -12,8 +12,9 @@ import { CREATE_NOTE } from "../../notes/components/constants";
 import styles from './HomePage.module.scss';
 import useSWR from "swr";
 import * as db from "../../../firebase";
-import {fetchNotes} from "../../notes/store";
-import {fetchNotess} from "../../../firebase";
+// import {fetchNotes} from "../../notes/store";
+import {fetchNotes} from "../../../firebase";
+import {ToolFilled} from "@ant-design/icons";
 
 export const userNotes = atom({
   key: "userNotes",
@@ -24,7 +25,7 @@ export const userNotes = atom({
 export const HomePage: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   
-  const userDetails : any = useRecoilValueLoadable(fetchNotess);
+  const userDetails : any = useRecoilValueLoadable(fetchNotes);
   const { state } = userDetails;
   
   const { contents} = userDetails;
@@ -48,23 +49,52 @@ export const HomePage: React.FC = () => {
   return (
     <div className={styles.overviewSection}>
      <UserInfo/>
-     <div>
-       {/*<p>UID {user?.uid}</p>*/}
+       
        <div className={styles.statisticData}>
-         <div>
-         
+         <div className={styles.flexBox}>
+           <div className={styles.counts}>
+             <div className={styles.countBlock}>
+               <div className={styles.countName}>
+                 <div className={styles.iconWrap}><ToolFilled className={styles.icon} style={{ fontSize: '12px', color: 'white' }} /></div>
+                 <p className={styles.name}>All Notes</p>
+               </div>
+               <span className={styles.totalCount}>{contents?.length}</span>
+             </div>
+    
+             <div className={styles.countBlock}>
+               <div className={styles.countName}>
+                 <div className={styles.iconWrap}><ToolFilled className={styles.icon} style={{ fontSize: '12px', color: 'white' }} /></div>
+                 <p className={styles.name}>Notes in Progress</p>
+               </div>
+               <span className={styles.totalCount}>8</span>
+             </div>
+             <div className={styles.countBlock}>
+               <div className={styles.countName}>
+                 <div className={styles.iconWrap}><ToolFilled className={styles.icon} style={{ fontSize: '12px', color: 'white' }} /></div>
+                 <p className={styles.name}>Done</p>
+               </div>
+               <span className={styles.totalCount}>4</span>
+             </div>
+           </div>
+  
+           <Button type="primary" onClick={showModal}>
+             {CREATE_NOTE}
+           </Button>
+           
          </div>
+         
+
+         
+         {
+           state === 'hasValue' && (
+             <UserNotes notes={contents}/>
+           )
+         }
        </div>
-       <Button type="primary" onClick={showModal}>
-         {CREATE_NOTE}
-       </Button>
-       {
-         state === 'hasValue' && (
-           <UserNotes notes={contents}/>
-         )
-       }
+       
+       
+       
        <CreateNote handleCancel={handleCancel} isModalVisible={isModalVisible}/>
-     </div>
     </div>
   );
 }
