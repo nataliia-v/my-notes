@@ -1,25 +1,34 @@
 import React, { useState } from "react";
-import {atom, useRecoilState, useRecoilValue, useRecoilValueLoadable} from "recoil";
-import {Layout, Modal, Button, Spin, Empty} from "antd";
+import { atom, useRecoilValueLoadable } from "recoil";
+import { Button, Spin } from "antd";
 
 import { UserNotes } from "../../notes/components/notesList/UserNotes";
 import { CreateNote } from "../../notes/components/createNote";
 import { UserInfo } from "../../overview/components/userInfo/UserInfo";
 
 import { loggedUser } from "../../../App";
-import { CREATE_NOTE } from "../../notes/components/constants";
-
-import styles from './HomePage.module.scss';
+import { CREATE_NOTE } from "../../notes/constants";
 import useSWR from "swr";
 import * as db from "../../../firebase";
-// import {fetchNotes} from "../../notes/store";
-import {fetchNotes} from "../../../firebase";
-import {ToolFilled} from "@ant-design/icons";
+import { fetchNotes } from "../../../firebase";
+import {
+  AppstoreAddOutlined,
+  AppstoreOutlined,
+  CheckCircleFilled,
+  SyncOutlined,
+} from "@ant-design/icons";
+
+import styles from './HomePage.module.scss';
+import {notes} from "../../../shared/constants";
+import {NoteItem} from "../../notes/components/notesList";
+import {NotesCountersContainer} from "../../notes/components/notesCoutners";
 
 export const userNotes = atom({
   key: "userNotes",
   default: [],
 });
+
+
 
 
 export const HomePage: React.FC = () => {
@@ -46,39 +55,23 @@ export const HomePage: React.FC = () => {
   const handleCancel = () => {
     setIsModalVisible(false);
   };
+  
+  
   return (
     <div className={styles.overviewSection}>
+     
      <UserInfo/>
        
        <div className={styles.statisticData}>
          <div className={styles.flexBox}>
+           
            <div className={styles.counts}>
-             <div className={styles.countBlock}>
-               <div className={styles.countName}>
-                 <div className={styles.iconWrap}><ToolFilled className={styles.icon} style={{ fontSize: '12px', color: 'white' }} /></div>
-                 <p className={styles.name}>All Notes</p>
-               </div>
-               <span className={styles.totalCount}>{contents?.length}</span>
-             </div>
-    
-             <div className={styles.countBlock}>
-               <div className={styles.countName}>
-                 <div className={styles.iconWrap}><ToolFilled className={styles.icon} style={{ fontSize: '12px', color: 'white' }} /></div>
-                 <p className={styles.name}>Notes in Progress</p>
-               </div>
-               <span className={styles.totalCount}>8</span>
-             </div>
-             <div className={styles.countBlock}>
-               <div className={styles.countName}>
-                 <div className={styles.iconWrap}><ToolFilled className={styles.icon} style={{ fontSize: '12px', color: 'white' }} /></div>
-                 <p className={styles.name}>Done</p>
-               </div>
-               <span className={styles.totalCount}>4</span>
-             </div>
+             <NotesCountersContainer notes={contents}/>
            </div>
   
            <Button type="primary" onClick={showModal}>
-             {CREATE_NOTE}
+             <AppstoreAddOutlined />
+             { CREATE_NOTE }
            </Button>
            
          </div>

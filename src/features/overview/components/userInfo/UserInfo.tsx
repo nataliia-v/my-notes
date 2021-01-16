@@ -7,9 +7,7 @@ import styles from './UserInfo.module.scss';
 
 export const UserInfo: React.FC = () => {
   const user = useRecoilValue<any>(loggedUser);
-  console.log('user in user info',user);
   
-  // const { displayName, uid, email, photoURL } = user;
   return (
     <div className={styles.userInfoBlock}>
       <div className={styles.mainInfo}>

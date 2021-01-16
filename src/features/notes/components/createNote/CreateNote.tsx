@@ -6,7 +6,7 @@ import { Button, Modal, Tabs } from 'antd';
 import { loggedUser } from "../../../../App";
 import { NoteItem } from "../notesList";
 import * as db from '../../../../firebase'
-import { CREATE_NOTE, DEFAULT_NOTE } from "../constants";
+import { CREATE_NOTE, DEFAULT_NOTE } from "../../constants";
 
 import styles from './CreateNote.module.scss';
 

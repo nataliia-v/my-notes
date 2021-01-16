@@ -20,42 +20,6 @@
     .counts {
       display: flex;
       align-items: center;
-      .countBlock {
-        padding: 20px;
-        background-color: white;
-        width: 200px;
-        border-radius: 20px;
-        margin-right: 15px;
-        .countName {
-          margin-bottom: 15px;
-          display: flex;
-          .iconWrap {
-            background-color: $secondary-color;
-            border-radius: 50%;
-            padding: 8px;
-            width: 15px;
-            height: 15px;
-            position: relative;
-            margin-right: 5px;
-            .icon {
-              position: absolute;
-              top: 50%;
-              left: 50%;
-              transform: translate(-50%, -50%);
-            }
-          }
-          .name {
-            font-size: 10px;
-            color: $count-name-color;
-            font-weight: bold;
-          }
-        }
-        .totalCount {
-          font-size: 30px;
-          color: $text-color;
-          margin-bottom: 0;
-        }
-      }
     }
   }
 }
