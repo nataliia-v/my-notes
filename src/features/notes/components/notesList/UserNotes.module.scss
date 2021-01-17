@@ -1,3 +1,19 @@
-.img {
-  width: 200px;
+@import "../../../../assets/scss/variables";
+
+.notesList {
+  background-color: $main-background-color;
+  border-radius: 20px;
+}
+
+.listWrap {
+  display: flex;
+  align-items: center;
+  padding: 10px 0 10px 0;
+}
+
+.rotated {
+  padding: 10px;
+  color:$secondary-text-color;
+  writing-mode: tb-rl;
+  transform: rotate(-180deg);
 }

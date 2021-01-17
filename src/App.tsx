@@ -1,35 +1,22 @@
 import React, { useEffect } from "react";
-import { atom, useRecoilState, useRecoilValue } from "recoil";
+import { atom, useRecoilState } from "recoil";
 import { Layout, Spin } from "antd";
 import { Route } from "react-router-dom";
 
 import { SignIn } from "./features/auth/signIn";
-import { CreateNote } from "./features/notes/components/createNote";
-import { UserNotes } from "./features/notes/components/notesList/UserNotes";
+import { HomePage } from "./features/homePage/components";
+import { Header } from "./shared/components/header";
 
-import * as db from './firebase'
 import { useAuth } from "./shared/hooks";
 
 import "./App.css";
 
-export const loggedUser = atom({
+
+export const loggedUser = atom<any>({
   key: "loggedUser",
   default: null,
 });
 
-function HomePage() {
-  const user = useRecoilValue<any>(loggedUser);
-  
-  return (
-    <Layout>
-      Home Page
-      <p>Hello, {user?.displayName}</p>
-      <p>UID {user?.uid}</p>
-      <UserNotes/>
-      <CreateNote/>
-    </Layout>
-  );
-}
 
 function NotePage() {
   return (
@@ -59,13 +46,14 @@ export const AuthApp: React.FC<AuthAppProps> = ({user}) => {
       uid
     }
     )}, []);
+
   
   
   return(
     <>
-      <button onClick={()=> {db.logOut()}}>Logout</button>
-      <Route path="/:noteId" component={NotePage} />
-      <Route exact path="/" component={HomePage} />
+      <Header name={'Overview'}/>
+        <Route path="/:noteId" component={NotePage} />
+        <Route exact path="/" component={HomePage} />
     </>
   )
 }

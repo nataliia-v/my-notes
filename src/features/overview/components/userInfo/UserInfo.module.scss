@@ -1,0 +1,30 @@
+@import "../../../../assets/scss/variables";
+
+.userInfoBlock {
+  height: 85vh;
+  width: 350px;
+  min-width: 350px;
+  background-color: white;
+  padding: 40px 30px;
+  border-radius: 20px;
+  margin-right: 50px;
+  .mainInfo {
+    display: flex;
+    justify-content: space-between;
+    .nameEmail {
+      margin-right: 20px;
+      .userName {
+        font-weight: bold;
+        //color: ;
+      }
+      .userEmail {
+        color: $secondary-text-color;
+      }
+    }
+    .userImg {
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+    }
+  }
+}

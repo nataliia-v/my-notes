@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { mutate } from 'swr';
+import { Button, Modal, Tabs } from 'antd';
 
 import { loggedUser } from "../../../../App";
 import { NoteItem } from "../notesList";
 import * as db from '../../../../firebase'
-import { DEFAULT_NOTE } from "../constants";
+import { CREATE_NOTE, DEFAULT_NOTE } from "../../constants";
 
 import styles from './CreateNote.module.scss';
 
+export interface CreateNoteProps {
+  isModalVisible: boolean,
+  handleCancel: () => void
+}
 
-export const CreateNote: React.FC = () => {
+export const CreateNote: React.FC<CreateNoteProps> = ({isModalVisible, handleCancel}) => {
+  const { TabPane } = Tabs;
   
   const user = useRecoilValue<any>(loggedUser);
   
@@ -41,9 +47,17 @@ export const CreateNote: React.FC = () => {
     }
   }
   
+  
+  function callback(key: any) {
+    console.log(key);
+  }
+  
   return (
-    <>
-      <div>Create NOTE</div>
+    <Modal title={CREATE_NOTE} visible={isModalVisible} onCancel={handleCancel} onOk={handleCreateNote} footer={[
+      <Button key="submit" type="primary" loading={submitting} onClick={handleCreateNote}>
+        {submitting ? "Creating..." : "Create Note"}
+      </Button>,
+    ]}>
       <input
         type="text"
         name="name"
@@ -51,14 +65,28 @@ export const CreateNote: React.FC = () => {
         required
         value={note.name}
         onChange={(event)=> handleChange(event)}/>
-      <textarea
-        name="description"
-        placeholder="Add description"
-        value={note.description}
-        onChange={(event)=> handleChange(event)}/>
+      <Tabs defaultActiveKey="1" onChange={callback}>
+        <TabPane tab="Text aria" key="textAria">
+                <textarea
+                  name="description"
+                  placeholder="Add description"
+                  value={note.description}
+                  onChange={(event)=> handleChange(event)}/>
+        </TabPane>
+        <TabPane tab="List" key="list">
+          <input
+            type="text"
+            name="name1"
+            placeholder="Add item name"
+            required
+            value={note.name}
+            onChange={(event)=> handleChange(event)}/>
+        </TabPane>
+      </Tabs>
       <input
         placeholder="Add list name"
         type="file"
+        accept="image/*"
         name="images"
         onChange={(event)=> handleChange(event)}
       />
@@ -67,9 +95,6 @@ export const CreateNote: React.FC = () => {
           <img className={styles.img} src={URL.createObjectURL(note.images)} alt=""/>
         )
       }
-      <button onClick={handleCreateNote} disabled={submitting}>
-        {submitting ? "Creating..." : "Create Note"}
-      </button>
-    </>
+    </Modal>
   );
 };

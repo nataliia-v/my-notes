@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import * as db from '../../firebase';
-
 
 export const useAuth = () => {
   const [user, setUser] = useState<any>(null); // add user Type !!!

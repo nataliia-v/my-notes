@@ -1,0 +1,30 @@
+@import "../../../assets/scss/variables";
+
+.overviewSection {
+  display: flex;
+  justify-content: space-between;
+  background-color: $main-background-color;
+  padding:0 50px;
+  width: 100%;
+}
+
+.statisticData {
+  width: 100%;
+
+  .flexBox {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+    .counts {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
+
+
+
+
