@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { atom, useRecoilStateg } from "recoil";
+import { atom, useRecoilState } from "recoil";
 import { Layout, Spin } from "antd";
 import { Route } from "react-router-dom";
 
