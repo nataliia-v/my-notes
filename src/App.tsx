@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { atom, useRecoilState, useRecoilValue } from "recoil";
+import { atom, useRecoilStateg } from "recoil";
 import { Layout, Spin } from "antd";
 import { Route } from "react-router-dom";
 
@@ -7,11 +7,9 @@ import { SignIn } from "./features/auth/signIn";
 import { HomePage } from "./features/homePage/components";
 import { Header } from "./shared/components/header";
 
-import * as db from './firebase'
 import { useAuth } from "./shared/hooks";
 
 import "./App.css";
-import firebase from "firebase";
 
 
 export const loggedUser = atom<any>({
