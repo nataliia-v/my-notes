@@ -3,7 +3,10 @@ export const DEFAULT_NOTE = {
   description: "",
   images: "",
   created_at: null,
-  label: null,
+  label: {
+    color: "",
+    label_name: "",
+  },
   list: null,
   updated_at: null,
   co_owner: null,

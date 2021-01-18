@@ -1,4 +1,5 @@
 @import '~antd/dist/antd.css';
+@import '~react-colorful/dist/index.css';
 @import './assets/scss/variables.scss';
 @import './assets/scss/mixins.scss';
 
@@ -12,6 +13,5 @@ body {
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

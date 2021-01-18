@@ -1,5 +1,5 @@
 import React from "react";
-import { Card } from "antd";
+import { Card, Tag } from "antd";
 import { EditOutlined, EllipsisOutlined, SettingOutlined } from "@ant-design/icons";
 
 import { NoteItem } from "../notesList";
@@ -13,7 +13,7 @@ export interface NoteCardProps {
 export const NoteCard: React.FC<NoteCardProps> = ({note}) => {
   const { Meta } = Card;
   
-  const { name, description, images } = note;
+  const { name, description, images, label } = note;
   
   return (
     <Card
@@ -36,7 +36,12 @@ export const NoteCard: React.FC<NoteCardProps> = ({note}) => {
       ]}
     >
       <Meta
-        title={name}
+        title={<div className={styles.cardTitle}>
+          <h3 className={styles.title}>{name}</h3>
+          {
+            label?.color && label?.label_name && <div className={styles.tagWrap}><Tag color={label.color}>{label.label_name}</Tag></div>
+          }
+        </div>}
         description={description || 'fdf '}
         className={styles.description}
       />
