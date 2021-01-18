@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { mutate } from 'swr';
 import { Button, Modal, Tabs } from 'antd';
+import { HexColorPicker } from "react-colorful";
 
 import { loggedUser } from "../../../../App";
 import { NoteItem } from "../notesList";
@@ -25,13 +26,19 @@ export const CreateNote: React.FC<CreateNoteProps> = ({isModalVisible, handleCan
   
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>|React.ChangeEvent<HTMLTextAreaElement>| any ) => {
     const { name, value, files } = event.target;
-    
     if(files) {
       const image = files[0];
       setNote(prevState => ({...prevState, images: image}))
-    } else {
+    } else if(name === 'label_name'){
+      setNote(prevState => ({...prevState, label : {...prevState.label, label_name: value}}))
+    }
+    else {
       setNote(prevState => ({...prevState, [name]: value}))
     }
+  }
+  
+  const handleColorChange = (selectedColor: string) => {
+    setNote(prevState => ({...prevState, label : {...prevState.label, color: selectedColor}}))
   }
   
   const handleCreateNote = async () => {
@@ -64,14 +71,23 @@ export const CreateNote: React.FC<CreateNoteProps> = ({isModalVisible, handleCan
         placeholder="Add name"
         required
         value={note.name}
-        onChange={(event)=> handleChange(event)}/>
+        onChange={(event)=> handleChange(event)}
+      />
+      <input
+        type="text"
+        name="label_name"
+        placeholder="Add label name"
+        value={note.label.label_name}
+        onChange={(event)=> handleChange(event)}
+      />
       <Tabs defaultActiveKey="1" onChange={callback}>
         <TabPane tab="Text aria" key="textAria">
-                <textarea
-                  name="description"
-                  placeholder="Add description"
-                  value={note.description}
-                  onChange={(event)=> handleChange(event)}/>
+          <textarea
+            name="description"
+            placeholder="Add description"
+            value={note.description}
+            onChange={(event)=> handleChange(event)}
+          />
         </TabPane>
         <TabPane tab="List" key="list">
           <input
@@ -95,6 +111,12 @@ export const CreateNote: React.FC<CreateNoteProps> = ({isModalVisible, handleCan
           <img className={styles.img} src={URL.createObjectURL(note.images)} alt=""/>
         )
       }
+      {
+        note.label.label_name && (
+          <HexColorPicker color={note.label.color} onChange={(selectedColor)=> handleColorChange(selectedColor)} />
+        )
+      }
+      
     </Modal>
   );
 };

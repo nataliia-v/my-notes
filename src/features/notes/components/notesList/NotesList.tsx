@@ -3,8 +3,7 @@ import { useRecoilValueLoadable } from "recoil";
 import { Spin } from 'antd';
 
 import { Header } from "../../../../shared/components/header";
-import {fetchNotes} from "../../../../firebase";
-// import { fetchNotes } from "../../store";
+import { fetchNotes } from "../../../../firebase";
 
 export interface NoteItem {
   author?: string,
@@ -13,7 +12,10 @@ export interface NoteItem {
   description: string;
   id?: string;
   images: string;
-  label: string | null;
+  label: {
+    color: string;
+    label_name: string;
+  };
   list: null | any;
   name: string;
   updated_at: object | null;

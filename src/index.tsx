@@ -8,12 +8,10 @@ import App from "./App";
 import "./index.css";
 
 ReactDOM.render(
-  <React.StrictMode>
     <RecoilRoot>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </RecoilRoot>
-  </React.StrictMode>,
+    </RecoilRoot>,
   document.getElementById("root")
 );
