@@ -11,66 +11,53 @@ import { useAuth } from "./shared/hooks";
 
 import "./App.css";
 
-
 export const loggedUser = atom<any>({
   key: "loggedUser",
   default: null,
 });
 
-
 function NotePage() {
-  return (
-    <Layout>
-      Note Page
-    </Layout>
-  );
+  return <Layout>Note Page</Layout>;
 }
-
 
 export interface AuthAppProps {
-  user: any
+  user: any;
 }
 
-export const AuthApp: React.FC<AuthAppProps> = ({user}) => {
-  
+export const AuthApp: React.FC<AuthAppProps> = ({ user }) => {
   const [authUser, setAuthUser] = useRecoilState<any>(loggedUser);
-  
+
   const { displayName, email, photoURL, uid } = user;
-  
+
   useEffect(() => {
     user &&
-    setAuthUser({
-      displayName,
-      email,
-      photoURL,
-      uid
-    }
-    )}, []);
+      setAuthUser({
+        displayName,
+        email,
+        photoURL,
+        uid,
+      });
+  }, []);
 
-  
-  
-  return(
+  return (
     <>
-      <Header name={'Overview'}/>
-        <Route path="/:noteId" component={NotePage} />
-        <Route exact path="/" component={HomePage} />
+      <Header name={"Overview"} />
+      <Route path="/:noteId" component={NotePage} />
+      <Route exact path="/" component={HomePage} />
     </>
-  )
-}
+  );
+};
 
 function UnAuthApp() {
   return <SignIn />;
 }
 
 function App() {
+  const { user, loading } = useAuth();
 
-const { user, loading } = useAuth();
-  
-  if (loading) return <Spin/>
+  if (loading) return <Spin />;
 
-  return (
-    user ? <AuthApp user={user}/> : <UnAuthApp/>
-  );
+  return user ? <AuthApp user={user} /> : <UnAuthApp />;
 }
 
 export default App;

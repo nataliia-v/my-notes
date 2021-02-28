@@ -1,12 +1,12 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { useRecoilValueLoadable } from "recoil";
-import { Spin } from 'antd';
+import { Spin } from "antd";
 
 import { Header } from "../../../../shared/components/header";
 import { fetchNotes } from "../../../../firebase";
 
 export interface NoteItem {
-  author?: string,
+  author?: string;
   co_owner: string | null;
   created_at: object | null | Date;
   description: string;
@@ -16,46 +16,38 @@ export interface NoteItem {
     color: string;
     label_name: string;
   };
-  list: null | any;
+  list: { name: string; id?: string }[];
   name: string;
   updated_at: object | null;
   is_done: boolean;
 }
 
-
 const NotesDetails = () => {
-  
-  const userDetails : any = useRecoilValueLoadable(fetchNotes);
+  const userDetails: any = useRecoilValueLoadable(fetchNotes);
   const { state } = userDetails;
 
-  const { contents} = userDetails;
-  
-  if (state === 'hasError') {
-    return <div> There is some problem! </div>
+  const { contents } = userDetails;
+
+  if (state === "hasError") {
+    return <div> There is some problem! </div>;
   }
-  
-  if(state === 'loading'){
-    return (<Spin tip="Loading..."/>)
+
+  if (state === "loading") {
+    return <Spin tip="Loading..." />;
   }
-  
-  if(state === 'hasValue'){
-    return (
-      contents.map((item: NoteItem) => (
-        <div key={item.id}>
-          <p>
-            {item.name}
-          </p>
-        </div>
-      ))
-    );
-    
+
+  if (state === "hasValue") {
+    return contents.map((item: NoteItem) => (
+      <div key={item.id}>
+        <p>{item.name}</p>
+      </div>
+    ));
   }
-}
+};
 
 export const NotesList: React.FC = () => {
-  
   const [imgUrl, setImgUrl] = useState(null);
-  
+
   const onUploadImage = async (e: any) => {
     const file = e.target.files[0]; // upload the first file only
     // const storageRef = app.storage().ref();
@@ -63,17 +55,16 @@ export const NotesList: React.FC = () => {
     // await fileRef.put(file);
     // setImgUrl(await fileRef.getDownloadURL())
   };
-  
+
   const onSubmit = (e: any) => {
     e.preventDefault();
   };
-
 
   return (
     <>
       <Header name={"Notes List"} />
       <div>NOTES LIST</div>
-      
+
       <form action="" onSubmit={onSubmit}>
         <input
           type="file"
@@ -84,7 +75,7 @@ export const NotesList: React.FC = () => {
         />
         <button>Submit</button>
       </form>
-      
+
       <div>
         <NotesDetails />
       </div>

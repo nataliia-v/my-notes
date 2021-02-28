@@ -1,12 +1,10 @@
 import React from "react";
 
-import * as db from '../../../firebase';
+import * as db from "../../../firebase";
 
-import styles from './SignIn.module.scss';
-
+import styles from "./SignIn.module.scss";
 
 export const SignIn: React.FC = () => {
-  
   return (
     <div className={styles.signIn}>
       <div className={styles.titleBlock}>

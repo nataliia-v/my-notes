@@ -8,10 +8,10 @@ import App from "./App";
 import "./index.css";
 
 ReactDOM.render(
-    <RecoilRoot>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </RecoilRoot>,
+  <RecoilRoot>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </RecoilRoot>,
   document.getElementById("root")
 );
