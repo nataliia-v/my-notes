@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useRecoilValueLoadable } from 'recoil';
 import { Spin } from 'antd';
 
@@ -46,16 +46,6 @@ const NotesDetails = () => {
 };
 
 export const NotesList: React.FC = () => {
-  const [imgUrl, setImgUrl] = useState(null);
-
-  const onUploadImage = async (e: any) => {
-    const file = e.target.files[0]; // upload the first file only
-    // const storageRef = app.storage().ref();
-    // const fileRef = storageRef.child(file.name);
-    // await fileRef.put(file);
-    // setImgUrl(await fileRef.getDownloadURL())
-  };
-
   const onSubmit = (e: any) => {
     e.preventDefault();
   };
@@ -66,13 +56,7 @@ export const NotesList: React.FC = () => {
       <div>NOTES LIST</div>
 
       <form action="" onSubmit={onSubmit}>
-        <input
-          type="file"
-          accept="image/*"
-          capture="camera"
-          id="cameraInput"
-          onChange={(e) => onUploadImage(e)}
-        />
+        <input type="file" accept="image/*" capture="camera" id="cameraInput" />
         <button>Submit</button>
       </form>
 

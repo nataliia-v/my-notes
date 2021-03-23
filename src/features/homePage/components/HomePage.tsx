@@ -13,11 +13,6 @@ import { fetchNotes } from '../../../firebase';
 
 import styles from './HomePage.module.scss';
 
-export const userNotes = atom({
-  key: 'userNotes',
-  default: [],
-});
-
 export const HomePage: React.FC = () => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 

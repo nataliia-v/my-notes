@@ -5,7 +5,6 @@ import { LogoutOutlined } from '@ant-design/icons';
 
 import { SideMenuItem } from '../sideMenuItem';
 
-// import { auth } from "../../../../../firebase";
 import { sidebarData } from '../../constants/sidebarData';
 import { overviewPathName } from '../../../../../shared/constants/routingConstants';
 

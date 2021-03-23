@@ -8,9 +8,9 @@ import { loggedUser } from '../../../../App';
 import { NoteItem } from '../notesList';
 import * as db from '../../../../firebase';
 import { CREATE_NOTE, DEFAULT_NOTE } from '../../constants';
+import { DynamicFields } from '../dynamicFields';
 
 import styles from './CreateNote.module.scss';
-import { DynamicFields } from '../dynamicFields';
 
 export interface CreateNoteProps {
   isModalVisible: boolean;
@@ -72,7 +72,7 @@ export const CreateNote: React.FC<CreateNoteProps> = ({
     console.log(key);
   }
 
-  ///// Dynamic Fields
+  // Dynamic Fields
 
   const handleAddFields = () => {
     const values = [...note.list];
