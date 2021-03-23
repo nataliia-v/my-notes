@@ -1,3 +1,22 @@
 .img {
   width: 200px;
 }
+
+.choose {
+  background-color: #7ebcea;
+}
+
+// custom upload button
+::-webkit-file-upload-button {
+  background: #1890ff;
+  color: #fff;
+  height: 32px;
+  padding: 4px 15px;
+  border: none;
+  outline: none;
+  margin-bottom: 15px;
+}
+
+.inp {
+  margin-bottom: 10px!important;
+}

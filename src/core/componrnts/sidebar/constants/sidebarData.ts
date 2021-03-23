@@ -1,7 +1,10 @@
-import { DesktopOutlined, PieChartOutlined } from "@ant-design/icons";
+import { DesktopOutlined, PieChartOutlined } from '@ant-design/icons';
 
-import { notes, overview } from "../../../../shared/constants";
-import { overviewPathName, notesPathName } from "../../../../shared/constants/routingConstants";
+import { notes, overview } from '../../../../shared/constants';
+import {
+  overviewPathName,
+  notesPathName,
+} from '../../../../shared/constants/routingConstants';
 
 export const sidebarData = [
   {

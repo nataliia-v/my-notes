@@ -1,5 +1,5 @@
 export type NoteCounterType = {
-  name: string,
-  icon: any,
-  count: number
+  name: string;
+  icon: any;
+  count: number;
 };

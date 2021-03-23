@@ -1,16 +1,16 @@
 import React from 'react';
 
-import { NotesCountersItem } from "./NotesCountersItem";
-import { NoteCounterType, NotesCountersListProps } from "../../models";
+import { NotesCountersItem } from './NotesCountersItem';
+import { NoteCounterType, NotesCountersListProps } from '../../models';
 
-export const NotesCountersList: React.FC<NotesCountersListProps> = ({ notesInfoData }) => {
+export const NotesCountersList: React.FC<NotesCountersListProps> = ({
+  notesInfoData,
+}) => {
   return (
     <>
-      {
-        notesInfoData.map((noteCounter: NoteCounterType) => (
-          <NotesCountersItem key={noteCounter.name} noteCounter={noteCounter} />
-        ))
-      }
+      {notesInfoData.map((noteCounter: NoteCounterType) => (
+        <NotesCountersItem key={noteCounter.name} noteCounter={noteCounter} />
+      ))}
     </>
   );
 };

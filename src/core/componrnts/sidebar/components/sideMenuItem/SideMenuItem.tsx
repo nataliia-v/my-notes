@@ -1,7 +1,7 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-import styles from "./SideMenuItem.module.scss";
+import styles from './SideMenuItem.module.scss';
 
 export interface SideMenuItem {
   name: string;

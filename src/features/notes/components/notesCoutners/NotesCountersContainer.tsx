@@ -1,13 +1,15 @@
-import React from "react";
+import React from 'react';
 
-import { NotesCountersList } from "./NotesCountersList";
+import { NotesCountersList } from './NotesCountersList';
 
-import useNotesCounters from "./hooks/useNotesCounters";
+import useNotesCounters from './hooks/useNotesCounters';
 
-import { NotesCountersProps } from "../../models";
+import { NotesCountersProps } from '../../models';
 
-export const NotesCountersContainer: React.FC<NotesCountersProps> = ({ notes }) => {
+export const NotesCountersContainer: React.FC<NotesCountersProps> = ({
+  notes,
+}) => {
   const { notesInfoData } = useNotesCounters({ notes });
-  
-  return <NotesCountersList notesInfoData={notesInfoData} />
-}
+
+  return <NotesCountersList notesInfoData={notesInfoData} />;
+};

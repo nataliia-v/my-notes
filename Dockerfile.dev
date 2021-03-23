@@ -10,6 +10,13 @@ RUN apk add --no-cache g++ make python
 # Globally node-sass from NPM
 RUN yarn install
 
-COPY . /app
+COPY src /app/src
+COPY public /app/public
+COPY tsconfig.json /app/tsconfig.json
+COPY tsconfig.overrides.json /app/tsconfig.overrides.json
+COPY .eslintrc.js /app/.eslintrc.js
+COPY .eslintignore /app/.eslintignore
+COPY .env /app/.env
+COPY .browserslistrc /app/.browserslistrc
 
 CMD ["yarn", "start"]

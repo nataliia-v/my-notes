@@ -1,15 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-import { Layout } from "antd";
-import { LogoutOutlined } from "@ant-design/icons";
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import { Layout } from 'antd';
+import { LogoutOutlined } from '@ant-design/icons';
 
-import { SideMenuItem } from "../sideMenuItem";
+import { SideMenuItem } from '../sideMenuItem';
 
-// import { auth } from "../../../../../firebase";
-import { sidebarData } from "../../constants/sidebarData";
-import { overviewPathName } from "../../../../../shared/constants/routingConstants";
+import { sidebarData } from '../../constants/sidebarData';
+import { overviewPathName } from '../../../../../shared/constants/routingConstants';
 
-import styles from "./Sider.module.scss";
+import styles from './Sider.module.scss';
 
 export const Sidebar: React.FC = () => {
   const history = useHistory();
@@ -34,10 +33,10 @@ export const Sidebar: React.FC = () => {
       collapsed={collapsed}
       onCollapse={onCollapse}
       theme="light"
-      style={{ backgroundColor: "#2096ee" }}
+      style={{ backgroundColor: '#2096ee' }}
     >
       <nav className={styles.sidebarNav}>
-        <ul className={styles.sidebarList} style={{ height: "120px" }}>
+        <ul className={styles.sidebarList} style={{ height: '120px' }}>
           {listSideMenuItems}
         </ul>
       </nav>
