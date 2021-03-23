@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { useRecoilValueLoadable } from "recoil";
-import { Spin } from "antd";
+import React, { useState } from 'react';
+import { useRecoilValueLoadable } from 'recoil';
+import { Spin } from 'antd';
 
-import { Header } from "../../../../shared/components/header";
-import { fetchNotes } from "../../../../firebase";
+import { Header } from '../../../../shared/components/header';
+import { fetchNotes } from '../../../../firebase';
 
 export interface NoteItem {
   author?: string;
   co_owner: string | null;
-  created_at: object | null | Date;
+  created_at: any | null | Date;
   description: string;
   id?: string;
   images: string;
@@ -18,7 +18,7 @@ export interface NoteItem {
   };
   list: { name: string; id?: string }[];
   name: string;
-  updated_at: object | null;
+  updated_at: any | null;
   is_done: boolean;
 }
 
@@ -28,15 +28,15 @@ const NotesDetails = () => {
 
   const { contents } = userDetails;
 
-  if (state === "hasError") {
+  if (state === 'hasError') {
     return <div> There is some problem! </div>;
   }
 
-  if (state === "loading") {
+  if (state === 'loading') {
     return <Spin tip="Loading..." />;
   }
 
-  if (state === "hasValue") {
+  if (state === 'hasValue') {
     return contents.map((item: NoteItem) => (
       <div key={item.id}>
         <p>{item.name}</p>
@@ -62,7 +62,7 @@ export const NotesList: React.FC = () => {
 
   return (
     <>
-      <Header name={"Notes List"} />
+      <Header name={'Notes List'} />
       <div>NOTES LIST</div>
 
       <form action="" onSubmit={onSubmit}>

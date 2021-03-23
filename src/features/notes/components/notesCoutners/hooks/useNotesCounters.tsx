@@ -1,15 +1,15 @@
-import React, { useMemo } from "react";
+import React, { useMemo } from 'react';
 import {
   AppstoreOutlined,
   CheckCircleFilled,
   SyncOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 
-import { NoteItem } from "../../notesList";
+import { NoteItem } from '../../notesList';
 
-import { NoteCounterType, UseNotesCountersProps } from "../../../models";
+import { NoteCounterType, UseNotesCountersProps } from '../../../models';
 
-import styles from "../NotesCounters.module.scss";
+import styles from '../NotesCounters.module.scss';
 
 const useNotesCounters = ({ notes }: UseNotesCountersProps) => {
   const inProgressCount = useMemo(() => {
@@ -31,31 +31,31 @@ const useNotesCounters = ({ notes }: UseNotesCountersProps) => {
   const notesInfoData = useMemo(() => {
     return [
       {
-        name: "All Notes",
+        name: 'All Notes',
         icon: (
           <AppstoreOutlined
             className={styles.icon}
-            style={{ fontSize: "12px", color: "white" }}
+            style={{ fontSize: '12px', color: 'white' }}
           />
         ),
         count: notes?.length,
       },
       {
-        name: "Notes in Progress",
+        name: 'Notes in Progress',
         icon: (
           <SyncOutlined
             className={styles.icon}
-            style={{ fontSize: "12px", color: "white" }}
+            style={{ fontSize: '12px', color: 'white' }}
           />
         ),
         count: inProgressCount,
       },
       {
-        name: "Done",
+        name: 'Done',
         icon: (
           <CheckCircleFilled
             className={styles.icon}
-            style={{ fontSize: "12px", color: "white" }}
+            style={{ fontSize: '12px', color: 'white' }}
           />
         ),
         count: doneCount,

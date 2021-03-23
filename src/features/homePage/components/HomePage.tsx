@@ -1,23 +1,20 @@
-import React, { useState } from "react";
-import { atom, useRecoilValueLoadable } from "recoil";
-import { Button, Spin } from "antd";
-import {
-  AppstoreAddOutlined,
-} from "@ant-design/icons";
+import React, { useState } from 'react';
+import { atom, useRecoilValueLoadable } from 'recoil';
+import { Button, Spin } from 'antd';
+import { AppstoreAddOutlined } from '@ant-design/icons';
 
-import { UserNotes } from "../../notes/components/notesList/UserNotes";
-import { CreateNote } from "../../notes/components/createNote";
-import { UserInfo } from "../../overview/components/userInfo/UserInfo";
-import { NotesCountersContainer } from "../../notes/components/notesCoutners";
+import { UserNotes } from '../../notes/components/notesList/UserNotes';
+import { CreateNote } from '../../notes/components/createNote';
+import { UserInfo } from '../../overview/components/userInfo/UserInfo';
+import { NotesCountersContainer } from '../../notes/components/notesCoutners';
 
-import { CREATE_NOTE } from "../../notes/constants";
-import { fetchNotes } from "../../../firebase";
+import { CREATE_NOTE } from '../../notes/constants';
+import { fetchNotes } from '../../../firebase';
 
-import styles from "./HomePage.module.scss";
-
+import styles from './HomePage.module.scss';
 
 export const userNotes = atom({
-  key: "userNotes",
+  key: 'userNotes',
   default: [],
 });
 
@@ -29,11 +26,11 @@ export const HomePage: React.FC = () => {
 
   const { contents } = userDetails;
 
-  if (state === "hasError") {
+  if (state === 'hasError') {
     return <div> There is some problem! </div>;
   }
 
-  if (state === "loading") {
+  if (state === 'loading') {
     return <Spin tip="Loading..." />;
   }
 
@@ -61,7 +58,7 @@ export const HomePage: React.FC = () => {
           </Button>
         </div>
 
-        {state === "hasValue" && <UserNotes notes={contents} />}
+        {state === 'hasValue' && <UserNotes notes={contents} />}
       </div>
 
       <CreateNote handleCancel={handleCancel} isModalVisible={isModalVisible} />

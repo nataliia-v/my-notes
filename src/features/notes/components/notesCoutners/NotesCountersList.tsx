@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import { NotesCountersItem } from "./NotesCountersItem";
-import { NoteCounterType, NotesCountersListProps } from "../../models";
+import { NotesCountersItem } from './NotesCountersItem';
+import { NoteCounterType, NotesCountersListProps } from '../../models';
 
 export const NotesCountersList: React.FC<NotesCountersListProps> = ({
   notesInfoData,

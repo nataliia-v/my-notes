@@ -1,17 +1,16 @@
-import React from "react";
-import { Layout, Row, Divider } from "antd";
+import React from 'react';
+import { Layout, Row, Divider } from 'antd';
 
-import { NoteItem } from "./NotesList";
-import { NoteCard } from "../noteCard";
+import { NoteItem } from './NotesList';
+import { NoteCard } from '../noteCard';
 
-import styles from "./UserNotes.module.scss";
+import styles from './UserNotes.module.scss';
 
 export interface UserNotesProps {
   notes: NoteItem[];
 }
 
 export const UserNotes: React.FC<UserNotesProps> = ({ notes }) => {
-
   return (
     <Layout className={styles.notesList}>
       <div className={styles.listWrap}>

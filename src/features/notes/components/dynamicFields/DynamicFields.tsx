@@ -1,11 +1,10 @@
-import React from "react";
-import { Button, Input } from "antd";
-import { DeleteOutlined } from "@ant-design/icons";
+import React from 'react';
+import { Button, Input } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 
-import { NoteItem } from "../notesList";
+import { NoteItem } from '../notesList';
 
 import styles from './DynamicFields.module.scss';
-
 
 type DynamicFieldsProps = {
   note: NoteItem;
@@ -36,7 +35,7 @@ export const DynamicFields: React.FC<DynamicFieldsProps> = ({
             <Input
               type="text"
               placeholder="List item name"
-              value={field.name || ""}
+              value={field.name || ''}
               onChange={(e) => handleChangeDynamicFields(idx, e)}
             />
             <Button

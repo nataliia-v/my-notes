@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
-import { atom, useRecoilState } from "recoil";
-import { Layout, Spin } from "antd";
-import { Route } from "react-router-dom";
+import React, { useEffect } from 'react';
+import { atom, useRecoilState } from 'recoil';
+import { Layout, Spin } from 'antd';
+import { Route } from 'react-router-dom';
 
-import { SignIn } from "./features/auth/signIn";
-import { HomePage } from "./features/homePage/components";
-import { Header } from "./shared/components/header";
+import { SignIn } from './features/auth/signIn';
+import { HomePage } from './features/homePage/components';
+import { Header } from './shared/components/header';
 
-import { useAuth } from "./shared/hooks";
+import { useAuth } from './shared/hooks';
 
-import "./App.css";
+import './App.css';
 
 export const loggedUser = atom<any>({
-  key: "loggedUser",
+  key: 'loggedUser',
   default: null,
 });
 
@@ -41,7 +41,7 @@ export const AuthApp: React.FC<AuthAppProps> = ({ user }) => {
 
   return (
     <>
-      <Header name={"Overview"} />
+      <Header name={'Overview'} />
       <Route path="/:noteId" component={NotePage} />
       <Route exact path="/" component={HomePage} />
     </>

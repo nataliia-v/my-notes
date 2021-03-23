@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import { NotesCountersItemProps } from "../../models";
+import { NotesCountersItemProps } from '../../models';
 
-import styles from "./NotesCounters.module.scss";
+import styles from './NotesCounters.module.scss';
 
 export const NotesCountersItem: React.FC<NotesCountersItemProps> = ({
   noteCounter,

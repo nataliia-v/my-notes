@@ -1,4 +1,4 @@
-import React, { ComponentType } from "react";
+import React, { ComponentType } from 'react';
 
 export const withAuth = (WrappedComponent: ComponentType<any>) => {
   return (props: any) => {

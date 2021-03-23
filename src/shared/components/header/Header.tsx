@@ -1,11 +1,11 @@
-import React from "react";
-import { Button } from "antd";
+import React from 'react';
+import { Button } from 'antd';
 
-import { HeaderProps } from "./models";
-import { LogoutOutlined } from "@ant-design/icons";
-import * as db from "../../../firebase";
+import { HeaderProps } from './models';
+import { LogoutOutlined } from '@ant-design/icons';
+import * as db from '../../../firebase';
 
-import styles from "./Header.module.scss";
+import styles from './Header.module.scss';
 
 export const Header: React.FC<HeaderProps> = ({ name }) => {
   return (
@@ -19,7 +19,7 @@ export const Header: React.FC<HeaderProps> = ({ name }) => {
         type="primary"
         shape="round"
         icon={<LogoutOutlined />}
-        size={"large"}
+        size={'large'}
       >
         Logout
       </Button>

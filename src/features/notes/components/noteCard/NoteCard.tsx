@@ -1,14 +1,14 @@
-import React from "react";
-import { Card, Tag } from "antd";
+import React from 'react';
+import { Card, Tag } from 'antd';
 import {
   EditOutlined,
   EllipsisOutlined,
   SettingOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 
-import { NoteItem } from "../notesList";
+import { NoteItem } from '../notesList';
 
-import styles from "./NoteCard.module.scss";
+import styles from './NoteCard.module.scss';
 
 export interface NoteCardProps {
   note: NoteItem;
@@ -40,7 +40,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
             )}
           </div>
         }
-        description={description || "fdf "}
+        description={description || 'fdf '}
         className={styles.description}
       />
     </Card>

@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { useRecoilValue } from "recoil";
-import { mutate } from "swr";
-import { Button, Modal, Tabs, Input } from "antd";
-import { HexColorPicker } from "react-colorful";
+import React, { useState } from 'react';
+import { useRecoilValue } from 'recoil';
+import { mutate } from 'swr';
+import { Button, Modal, Tabs, Input } from 'antd';
+import { HexColorPicker } from 'react-colorful';
 
-import { loggedUser } from "../../../../App";
-import { NoteItem } from "../notesList";
-import * as db from "../../../../firebase";
-import { CREATE_NOTE, DEFAULT_NOTE } from "../../constants";
+import { loggedUser } from '../../../../App';
+import { NoteItem } from '../notesList';
+import * as db from '../../../../firebase';
+import { CREATE_NOTE, DEFAULT_NOTE } from '../../constants';
 
-import styles from "./CreateNote.module.scss";
-import { DynamicFields } from "../dynamicFields";
+import styles from './CreateNote.module.scss';
+import { DynamicFields } from '../dynamicFields';
 
 export interface CreateNoteProps {
   isModalVisible: boolean;
@@ -38,7 +38,7 @@ export const CreateNote: React.FC<CreateNoteProps> = ({
     if (files) {
       const image = files[0];
       setNote((prevState) => ({ ...prevState, images: image }));
-    } else if (name === "label_name") {
+    } else if (name === 'label_name') {
       setNote((prevState) => ({
         ...prevState,
         label: { ...prevState.label, label_name: value },
@@ -76,10 +76,9 @@ export const CreateNote: React.FC<CreateNoteProps> = ({
 
   const handleAddFields = () => {
     const values = [...note.list];
-    values.push({ name: "" });
+    values.push({ name: '' });
     setNote((prevState) => ({ ...prevState, list: values }));
   };
-
 
   return (
     <Modal
@@ -93,9 +92,13 @@ export const CreateNote: React.FC<CreateNoteProps> = ({
           type="primary"
           loading={submitting}
           onClick={handleCreateNote}
-          disabled={!note.name || note.name.length < 3 || note.list.length > 0 && note.list?.some((el)=> !el?.name)}
+          disabled={
+            !note.name ||
+            note.name.length < 3 ||
+            (note.list.length > 0 && note.list?.some((el) => !el?.name))
+          }
         >
-          {submitting ? "Creating..." : "Create Note"}
+          {submitting ? 'Creating...' : 'Create Note'}
         </Button>,
       ]}
     >

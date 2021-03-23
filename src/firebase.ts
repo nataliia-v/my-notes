@@ -93,17 +93,17 @@ export const fetchNotes = selector({
   get: async ({ get }) => {
     const user = get(loggedUser);
 
-    try {
-      const usersCollection = await db
-        .collection('notes')
-        .where('author', '==', user?.uid)
-        .get();
-      return usersCollection.docs.map((doc: any) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-    } catch (error) {
-      throw error;
-    }
+    // try {
+    const usersCollection = await db
+      .collection('notes')
+      .where('author', '==', user?.uid)
+      .get();
+    return usersCollection.docs.map((doc: any) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+    // } catch (error) {
+    //   throw error;
+    // }
   },
 });
