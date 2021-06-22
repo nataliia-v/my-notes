@@ -33,7 +33,7 @@ export const logOut = async () => {
 export const getCollection = async (id: string) => {
   const snapshot = await db.collection(id).get();
   const data = snapshot.docs.map((doc: any) => ({ id: doc.id, ...doc.data() }));
-  console.log('data', data);
+  console.log('getCollection data', data);
 };
 
 export const getUserNotes = async (userId: string) => {
@@ -41,7 +41,16 @@ export const getUserNotes = async (userId: string) => {
     .collection('notes')
     .where('author', '==', userId)
     .get();
+
+  console.log(
+    'USER DATA',
+    snapshot.docs.map((doc: any) => ({ id: doc.id, ...doc.data() }))
+  );
   return snapshot.docs.map((doc: any) => ({ id: doc.id, ...doc.data() }));
+};
+
+export const subscribeToNotesList = (userId: string, cb: any) => {
+  return db.collection('notes').where('author', '==', userId).onSnapshot(cb);
 };
 
 export const uploadImage = (file: any) => {
@@ -80,20 +89,13 @@ export const createNote = async (note: NoteItem, user: any) => {
   });
 };
 
-export const getUserNotess = async (userId: string) => {
-  const snapshot = await db
-    .collection('notes')
-    .where('author', '==', userId)
-    .get();
-  return snapshot.docs.map((doc: any) => ({ id: doc.id, ...doc.data() }));
-};
+export const deleteNote = (noteId: any) =>
+  db.collection('notes').doc(noteId).delete();
 
 export const fetchNotes = selector({
   key: 'notesSelector',
   get: async ({ get }) => {
     const user = get(loggedUser);
-
-    // try {
     const usersCollection = await db
       .collection('notes')
       .where('author', '==', user?.uid)
@@ -102,8 +104,5 @@ export const fetchNotes = selector({
       id: doc.id,
       ...doc.data(),
     }));
-    // } catch (error) {
-    //   throw error;
-    // }
   },
 });

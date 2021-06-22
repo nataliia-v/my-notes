@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { useRecoilValue } from 'recoil';
 import { mutate } from 'swr';
 import { Button, Modal, Tabs, Input } from 'antd';
 import { HexColorPicker } from 'react-colorful';
+import { useRecoilValue } from 'recoil';
 
 import { loggedUser } from '../../../../App';
 import { NoteItem } from '../notesList';
