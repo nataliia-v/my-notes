@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Layout, Row, Divider } from 'antd';
 
 import { NoteItem } from './NotesList';
 import { NoteCard } from '../noteCard';
 
 import styles from './UserNotes.module.scss';
+import * as db from '../../../../firebase';
 
 export interface UserNotesProps {
   notes: NoteItem[];

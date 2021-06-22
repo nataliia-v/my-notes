@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Tag } from 'antd';
 import {
   EditOutlined,
-  EllipsisOutlined,
   SettingOutlined,
+  DeleteOutlined,
 } from '@ant-design/icons';
 
 import { NoteItem } from '../notesList';
+import * as db from '../../../../firebase';
 
 import styles from './NoteCard.module.scss';
 
@@ -15,9 +16,13 @@ export interface NoteCardProps {
 }
 
 export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
+  const { name, description, label, id } = note;
+
   const { Meta } = Card;
 
-  const { name, description, label } = note;
+  const onDeleteNote = async () => {
+    await db.deleteNote(id);
+  };
 
   return (
     <Card
@@ -26,7 +31,7 @@ export const NoteCard: React.FC<NoteCardProps> = ({ note }) => {
       actions={[
         <SettingOutlined key="setting" />,
         <EditOutlined key="edit" />,
-        <EllipsisOutlined key="ellipsis" />,
+        <DeleteOutlined onClick={onDeleteNote} key="delete" />,
       ]}
     >
       <Meta
